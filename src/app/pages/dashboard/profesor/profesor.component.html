@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Panel del Profesor</h1>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Aulas asignadas con estudiantes -->
+<div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl transition">
+    <h2 class="text-base font-semibold text-gray-600 mb-4 flex items-center">
+      <i class="fas fa-school fa-lg text-blue-600 mr-2"></i> Aulas Asignadas
+    </h2>
+    <ul class="space-y-3">
+      <li *ngFor="let aula of dashboard.aulas" class="flex justify-between text-gray-700 border-b pb-2">
+        <span class="font-medium">{{ aula.nombre }}</span>
+        <span class="text-sm text-gray-500">{{ aula.estudiantes }} estudiantes</span>
+      </li>
+    </ul>
+  </div>
+  
+  
+      <!-- Laboratorios -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl hover:scale-[1.02] transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-gray-600">Laboratorios</h2>
+            <p class="text-3xl font-bold text-green-600">{{ dashboard.laboratorios }}</p>
+          </div>
+          <div class="bg-green-100 text-green-600 p-3 rounded-full">
+            <i class="fas fa-microscope fa-lg"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Historial de experimentos -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Historial de Experimentos</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded-2xl shadow-md overflow-hidden">
+          <thead class="bg-gray-200 text-gray-700 text-left">
+            <tr>
+              <th class="py-3 px-6">Nombre</th>
+              <th class="py-3 px-6">Puntaje</th>
+              <th class="py-3 px-6">Tiempo</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr *ngFor="let item of dashboard.historial" class="hover:bg-gray-50">
+              <td class="py-3 px-6">{{ item.nombre }}</td>
+              <td class="py-3 px-6 font-semibold" [ngClass]="{
+                'text-green-600': item.puntaje >= 9,
+                'text-orange-500': item.puntaje < 9 && item.puntaje >= 6,
+                'text-red-600': item.puntaje < 6
+              }">{{ item.puntaje }}/10</td>
+              <td class="py-3 px-6 text-sm text-gray-500">{{ item.tiempo }} segundos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

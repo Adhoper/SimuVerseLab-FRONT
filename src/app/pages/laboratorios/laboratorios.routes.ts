@@ -8,9 +8,5 @@ export const laboratoriosRoutes: Routes = [
       loadComponent: () => import("./laboratorios.component").then(c => c.LaboratoriosComponent)
   
     },
-    // {
-    //   path: 'videojuego-detalle-alquiler',
-    //   loadComponent: () => import("./detalle-alquiler/detalle-alquiler.component").then(c => c.DetalleAlquilerComponent)
-  
-    // }
+
   ];

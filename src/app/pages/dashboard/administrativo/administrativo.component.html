@@ -1,0 +1,89 @@
+<!-- DashboardComponent.html -->
+<div class="min-h-screen bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Panel de Control</h1>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Card: Aulas -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl hover:scale-[1.02] transition duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-gray-600">Aulas</h2>
+            <p class="text-3xl font-bold text-blue-600">{{ dashboard.aulas }}</p>
+          </div>
+          <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+            <i class="fas fa-school fa-lg"></i>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card: Laboratorios -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl hover:scale-[1.02] transition duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-gray-600">Laboratorios</h2>
+            <p class="text-3xl font-bold text-green-600">{{ dashboard.laboratorios }}</p>
+          </div>
+          <div class="bg-green-100 text-green-600 p-3 rounded-full">
+            <i class="fas fa-microscope fa-lg"></i>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card: Profesores -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl hover:scale-[1.02] transition duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-gray-600">Profesores</h2>
+            <p class="text-3xl font-bold text-red-600">{{ dashboard.profesores }}</p>
+          </div>
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <i class="fas fa-user-tie fa-lg"></i>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card: Estudiantes -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-xl hover:scale-[1.02] transition duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-gray-600">Estudiantes</h2>
+            <p class="text-3xl font-bold text-orange-600">{{ dashboard.estudiantes }}</p>
+          </div>
+          <div class="bg-orange-100 text-orange-600 p-3 rounded-full">
+            <i class="fas fa-users fa-lg"></i>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <!-- Historial de Experimentos -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Historial de Experimentos</h2>
+  
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded-2xl shadow-md overflow-hidden">
+          <thead class="bg-gray-200 text-gray-700 text-left">
+            <tr>
+              <th class="py-3 px-6">Nombre</th>
+              <th class="py-3 px-6">Puntaje</th>
+              <th class="py-3 px-6">Tiempo</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr *ngFor="let item of dashboard.historial" class="hover:bg-gray-50">
+              <td class="py-3 px-6">{{ item.nombre }}</td>
+              <td class="py-3 px-6 font-semibold" [ngClass]="{
+                'text-green-600': item.puntaje >= 9,
+                'text-orange-500': item.puntaje < 9 && item.puntaje >= 6,
+                'text-red-600': item.puntaje < 6
+              }">{{ item.puntaje }}/10</td>
+              <td class="py-3 px-6 text-sm text-gray-500">{{ item.tiempo }} segundos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

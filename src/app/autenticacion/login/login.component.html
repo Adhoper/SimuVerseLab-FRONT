@@ -1,0 +1,69 @@
+<app-loader></app-loader>
+<!-- Login responsivo: branding izquierda en desktop, arriba en móvil -->
+<div class="min-h-screen flex flex-col md:flex-row">
+  <!-- Branding -->
+  <div class="w-full md:w-1/3 bg-gradient-to-tr from-blue-800 to-green-700 flex justify-center items-center py-10 md:py-0">
+    <div class="text-center md:text-left px-6">
+      <h1 class="text-white font-bold text-4xl md:text-5xl font-sans">SimuVerse LAB</h1>
+      <p class="text-white mt-2 text-lg md:text-xl">Laboratorio de Realidad Virtual</p>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div class="w-full md:w-2/3 bg-white flex flex-col justify-center items-center px-6 py-12 md:py-0 min-h-[calc(100vh-180px)] md:min-h-0">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="bg-white w-full max-w-xl px-10 py-8 shadow-2xl rounded-2xl"
+    >
+      <h1 class="text-gray-800 font-bold text-4xl mb-2">¡Hola otra vez!</h1>
+      <p class="text-base font-normal text-gray-600 mb-8">Bienvenido/a</p>
+
+      <!-- Input de usuario -->
+      <div
+        class="flex items-center border-2 py-3 px-4 rounded-2xl mb-3 transition-all duration-300"
+        [class.border-red-500]="getInputClasses('identificadorUsuario')"
+      >
+        <i class="fas fa-user text-gray-400 mr-3"></i>
+        <input
+          formControlName="identificadorUsuario"
+          class="pl-2 outline-none border-none w-full text-base"
+          type="text"
+          placeholder="Correo Electrónico"
+        />
+      </div>
+
+      <!-- Input de contraseña -->
+      <div
+        class="flex items-center border-2 py-3 px-4 rounded-2xl mb-3 transition-all duration-300"
+        [class.border-red-500]="getInputClasses('contrasena')"
+      >
+        <i class="fas fa-lock text-gray-400 mr-3"></i>
+        <input
+          formControlName="contrasena"
+          class="pl-2 outline-none border-none w-full text-base"
+          type="password"
+          placeholder="Contraseña"
+        />
+      </div>
+
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMensaje" class="text-red-500 text-sm mb-4 px-1">
+        {{ errorMensaje }}
+      </div>
+
+      <!-- Botón -->
+      <button
+        type="submit"
+        class="cursor-pointer w-full bg-indigo-600 mt-2 py-3 text-base rounded-2xl text-white font-semibold hover:bg-indigo-700 transition"
+      >
+        Iniciar Sesión
+      </button>
+
+      <!-- Link de olvidó contraseña -->
+      <div class="text-center mt-4">
+        <span class="text-sm hover:text-blue-500 cursor-pointer">¿Olvidaste tu contraseña?</span>
+      </div>
+    </form>
+  </div>
+</div>
