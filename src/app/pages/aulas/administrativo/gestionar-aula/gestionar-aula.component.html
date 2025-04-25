@@ -1,0 +1,35 @@
+<div class="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+      {{ data ? 'Editar Aula' : 'Crear Aula' }}
+    </h2>
+  
+    <form [formGroup]="aulaForm" (ngSubmit)="guardar()">
+      <label class="block mb-4">
+        <span class="text-gray-700 font-medium">Nombre del Aula</span>
+        <input
+          type="text"
+          formControlName="nombre"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </label>
+      <label class="block mb-4">
+        <span class="text-gray-700 font-medium">Cantidad</span>
+        <input
+          type="text"
+          formControlName="nombre"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </label>
+      <div class="flex justify-end gap-2 mt-6">
+        <button type="button" class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md" (click)="cancelar()">Cancelar</button>
+        <button
+          type="submit"
+          class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          [disabled]="aulaForm.invalid"
+        >
+          {{ data ? 'Guardar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>
+  

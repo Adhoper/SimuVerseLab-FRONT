@@ -1,0 +1,19 @@
+<div class="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Asignar Profesor</h2>
+  
+    <div class="mb-4">
+      <label class="block text-gray-700 font-medium mb-2">Selecciona un profesor:</label>
+      <select [(ngModel)]="idProfesorSeleccionado" class="cursor-pointer w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option class="cursor-pointer" [ngValue]="null">-- Selecciona --</option>
+        <option class="cursor-pointer" *ngFor="let prof of profesores" [value]="prof.idUsuario">
+          {{ prof.nombre }} {{ prof.apellido }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="flex justify-end gap-2 mt-6">
+      <button class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md" (click)="cancelar()">Cancelar</button>
+      <button class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" (click)="asignar()" [disabled]="!idProfesorSeleccionado">Asignar</button>
+    </div>
+  </div>
+  

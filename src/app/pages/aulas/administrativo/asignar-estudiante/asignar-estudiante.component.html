@@ -1,0 +1,20 @@
+<div class="w-full max-w-lg p-6 bg-white rounded-xl shadow-lg">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Asignar Estudiantes</h2>
+  
+    <div class="max-h-64 overflow-y-auto border border-gray-200 rounded-md p-3 mb-4">
+      <label *ngFor="let estudiante of estudiantes" class="flex items-center gap-2 mb-2 cursor-pointer">
+        <input type="checkbox" [checked]="seleccionados.includes(estudiante.idUsuario)"
+               (change)="toggleSeleccion(estudiante.idUsuario)" />
+        <span>{{ estudiante.nombre }} {{ estudiante.apellido }}</span>
+      </label>
+    </div>
+  
+    <div class="flex justify-end gap-2">
+      <button class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md" (click)="cancelar()">Cancelar</button>
+      <button class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              (click)="asignar()" [disabled]="seleccionados.length === 0">
+        Asignar
+      </button>
+    </div>
+  </div>
+  

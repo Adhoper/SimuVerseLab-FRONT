@@ -1,0 +1,54 @@
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Gestión de Aulas</h2>
+      <button class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md" (click)="abrirModalCrear()">
+        + Crear Aula
+      </button>
+    </div>
+  
+    <!-- Filtros -->
+    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+      <input
+        type="text"
+        [(ngModel)]="filtroNombre"
+        placeholder="Buscar por nombre"
+        class="w-full md:w-1/4 px-4 py-2 border border-gray-300 rounded-lg"
+      />
+      <select
+        [(ngModel)]="filtroEstatus"
+        class="cursor-pointer w-full md:w-1/7 px-4 py-2 border border-gray-300 rounded-lg"
+      >
+        <option value="">Todos los estatus</option>
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+    </div>
+  
+    <!-- Tabla -->
+    <div class="overflow-x-auto shadow-lg rounded-xl bg-white">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100 text-gray-600 text-sm">
+          <tr>
+            <th class="px-6 py-3 text-left font-semibold">Nombre</th>
+            <th class="px-6 py-3 text-left font-semibold">Profesor</th>
+            <th class="px-6 py-3 text-left font-semibold">Cantidad de Estudiantes</th>
+            <th class="px-6 py-3 text-left font-semibold">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
+          <tr *ngFor="let aula of aulasFiltradas()">
+            <td class="px-6 py-4">{{ aula.nombre }}</td>
+            <td class="px-6 py-4">{{ aula.profesor?.nombre || 'No asignado' }}</td>
+            <td class="px-6 py-4">{{ aula.estudiantes?.length || 0 }}</td>
+            <td class="px-6 py-4 space-x-2">
+              <button class="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-md text-xs" (click)="editarAula(aula)">Editar</button>
+              <button class="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs" (click)="eliminarAula(aula.id)">Eliminar</button>
+              <button class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-xs" (click)="asignarProfesor(aula)">Asignar Profesor</button>
+              <button class="cursor-pointer bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-md text-xs" (click)="asignarEstudiantes(aula)">Asignar Estudiantes</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

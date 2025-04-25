@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 //import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-//import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 //import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     //SelectDropDownModule,
     FormsModule,
     RouterModule,
-    //MatDialogModule,
+    MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
     //NgxMaskDirective,
@@ -28,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     //SelectDropDownModule,
     FormsModule,
     RouterModule,
-    //MatDialogModule,
+    MatDialogModule,
     ReactiveFormsModule,
     //NgxMaskDirective,
     //NgxMaskPipe
