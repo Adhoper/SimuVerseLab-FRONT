@@ -48,7 +48,7 @@
           </a>
         </li>
         <li>
-          <a class="" href="/historialExperimento">
+          <a routerLink="/historialExperimento">
             <button (click)="seleccionarOpcion()" routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
             class="cursor-pointer middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white/100 hover:bg-white/10 active:bg-white/20 w-full flex items-center gap-4 px-4 capitalize" type="button">
             <i class="fas fa-history mr-2 fa-lg"></i>
@@ -57,7 +57,7 @@
           </a>
         </li>
         <li *ngIf="rol === 'Administrativo'">
-          <a class="" href="/usuarios">
+          <a routerLink="/usuarios">
             <button (click)="seleccionarOpcion()" routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
             class="cursor-pointer middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white/100 hover:bg-white/10 active:bg-white/20 w-full flex items-center gap-4 px-4 capitalize" type="button">
             <i class="fas fa-users mr-2 fa-lg"></i>
@@ -65,7 +65,6 @@
             </button>
           </a>
         </li>
-        
       </ul>
       <!-- <ul class="mb-4 flex flex-col gap-1">
         <li class="mx-3.5 mt-4 mb-2">
