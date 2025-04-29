@@ -1,22 +1,25 @@
 <div class="p-6">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Mis Aulas</h2>
-  
-    <!-- Filtro por nombre -->
-    <div class="mb-6 max-w-md">
-      <input
-        type="text"
-        [(ngModel)]="filtroNombre"
-        placeholder="Buscar por nombre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-      />
-    </div>
-  
-    <!-- Lista de aulas filtradas -->
-    <div *ngFor="let aula of aulasFiltradas()" class="bg-white rounded-xl shadow-md p-6 mb-4">
-      <h3 class="text-lg font-semibold text-blue-700 mb-2">{{ aula.nombre }}</h3>
+  <h2 class="flex items-center gap-3 text-3xl font-bold text-indigo-700 mb-8">
+    <i class="fas fa-school"></i> Mis Aulas
+  </h2>
+
+  <!-- Filtro -->
+  <div class="mb-6 max-w-md">
+    <input
+      type="text"
+      [(ngModel)]="filtroNombre"
+      placeholder="Buscar por nombre de aula"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    />
+  </div>
+
+  <!-- Aulas en Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let aula of aulasFiltradas()" class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+      <h3 class="text-lg font-bold text-indigo-700 mb-2">{{ aula.nombre }}</h3>
       <p class="text-sm text-gray-700">
-        Profesor a cargo: <span class="font-medium">{{ aula.profesor?.nombre || 'Sin asignar' }}</span>
+        Profesor a cargo: <span class="font-medium">{{ aula.profesor || 'Sin asignar' }}</span>
       </p>
     </div>
   </div>
-  
+</div>

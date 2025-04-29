@@ -41,6 +41,10 @@ export class HeaderComponent {
         this.rutaActual = 'Aulas';
       } else if (url.includes('/laboratorios')) {
         this.rutaActual = 'Laboratorios';
+      } else if (url.includes('/historialExperimento')) {
+        this.rutaActual = 'Historial Experimentos';
+      } else if (url.includes('/usuarios')) {
+        this.rutaActual = 'Usuarios';
       } else {
         this.rutaActual = '';
       }

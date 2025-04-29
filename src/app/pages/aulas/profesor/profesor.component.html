@@ -1,28 +1,35 @@
 <div class="p-6">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Mis Aulas Asignadas</h2>
-  
-    <!-- Filtro por nombre -->
-    <div class="mb-6 max-w-md">
-      <input
-        type="text"
-        [(ngModel)]="filtroNombre"
-        placeholder="Buscar por nombre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-      />
-    </div>
-  
-    <div *ngFor="let aula of aulasFiltradas()" class="bg-white rounded-xl shadow-md p-6 mb-4">
-      <h3 class="text-lg font-semibold text-blue-700 mb-2">{{ aula.nombre }}</h3>
-      <p class="text-sm text-gray-600 mb-2">Cantidad de Estudiantes: {{ aula.estudiantes?.length || 0 }}</p>
-  
-      <div class="mt-2">
-        <h4 class="text-sm font-medium text-gray-700 mb-1">Estudiantes:</h4>
-        <ul class="list-disc ml-5 text-sm text-gray-600">
-          <li *ngFor="let estudiante of aula.estudiantes">
-            {{ estudiante.nombre }}
-          </li>
-        </ul>
+  <h2 class="flex items-center gap-3 text-3xl font-bold text-indigo-700 mb-8">
+    <i class="fas fa-school"></i> Mis Aulas Asignadas
+  </h2>
+
+  <!-- Filtro -->
+  <div class="mb-6 max-w-md">
+    <input
+      type="text"
+      [(ngModel)]="filtroNombre"
+      placeholder="Buscar aula..."
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    />
+  </div>
+
+  <!-- Aulas -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let aula of aulasFiltradas()" class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col justify-between hover:shadow-lg transition">
+      <div>
+        <h3 class="text-lg font-bold text-indigo-700 mb-2">{{ aula.nombre }}</h3>
+        <p class="text-sm text-gray-600 mb-1"><strong>Capacidad:</strong> {{ aula.capacidad }}</p>
+        <p class="text-sm text-gray-600 mb-2"><strong>Estudiantes:</strong> {{ aula.listaEstudiantes.length }}</p>
+      </div>
+
+      <div class="mt-4">
+        <button 
+          class="w-full bg-indigo-600 hover:bg-indigo-700 cursor-pointer text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition"
+          (click)="verEstudiantes(aula)"
+        >
+          <i class="fas fa-users"></i> Ver Estudiantes
+        </button>
       </div>
     </div>
   </div>
-  
+</div>

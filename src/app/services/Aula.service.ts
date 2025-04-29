@@ -7,27 +7,56 @@ import { environment } from '../../environments/environment';
 })
 export class AulaService {
 
-  RUTA = 'api/Aula/'
+  RUTA = 'api/Aula/';
   BASE_API = environment.BASE_API_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getQuerys(query: string) {
+  private getQuery(query: string) {
     const url = `${this.BASE_API}${query}`;
     return this.http.get(url);
   }
 
-  postQuerys(query: string, data: any) {
+  private postQuery(query: string, data: any) {
     const url = `${this.BASE_API}${query}`;
     return this.http.post(url, data);
   }
 
-
-  ObtenerVideojuegos() {
-    return this.getQuerys(`${this.RUTA}get-all-videogames`);
+  // Obtener todas las aulas
+  ObtenerAulas() {
+    return this.getQuery(`${this.RUTA}get-all-aulas`);
   }
 
-  // setPublicarCalificacion(param: any) {
-  //   return this.postQuerys(`${this.RUTA}set-calification`, param);
-  // }
+  // Crear un aula
+  CrearAula(data: any) {
+    return this.postQuery(`${this.RUTA}set-aula`, data);
+  }
+
+  // Editar un aula
+  EditarAula(data: any) {
+    return this.postQuery(`${this.RUTA}update-aula`, data);
+  }
+
+  // Eliminar un aula
+  CambiarEstatusAula(idAula: number) {
+    return this.postQuery(`${this.RUTA}change-estatus-aula/${idAula}`, {});
+  }
+
+  // Asignar profesor a un aula
+  AsignarProfesorAula(data: any) {
+    return this.postQuery(`${this.RUTA}asignar-profesor-aula`, data);
+  }
+
+  // Asignar estudiantes a un aula
+  AsignarEstudiantesAula(data: any) {
+    return this.postQuery(`${this.RUTA}asignar-estudiantes-aula`, data);
+  }
+
+  GetAulasProfesor(IdUsuario:number) {
+    return this.getQuery(`${this.RUTA}get-aula-profesores/${IdUsuario}`);
+  }
+
+  GetAulasEstudiantes(IdUsuario:number) {
+    return this.getQuery(`${this.RUTA}get-aulas-por-estudiantes/${IdUsuario}`);
+  }
 }

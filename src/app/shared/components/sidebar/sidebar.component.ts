@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SharedModule } from '../../shared.module';
 
@@ -8,12 +8,18 @@ import { SharedModule } from '../../shared.module';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
   @Input() visible: boolean = false;
   @Output() cerrarSidebar = new EventEmitter<void>();
+  rol: string = '';
 
   constructor(private eRef: ElementRef) {}
+
+  ngOnInit(): void {
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.rol = usuario?.nombreRol;
+  }
 
   // Detecta clic fuera del sidebar
   @HostListener('document:click', ['$event'])
