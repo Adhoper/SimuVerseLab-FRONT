@@ -1,0 +1,35 @@
+<div class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+  <!-- Header azul -->
+  <div class="bg-indigo-600 p-4">
+    <h2 class="text-lg font-bold text-white text-center">
+      Estudiantes de {{ data.nombre }}
+    </h2>
+  </div>
+
+  <!-- Estudiantes -->
+  <div class="p-6">
+    <div *ngIf="data.listaEstudiantes.length > 0; else noEstudiantes">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[400px] overflow-y-auto">
+        <div *ngFor="let estudiante of data.listaEstudiantes" class="border border-gray-300 rounded-lg p-4 shadow-sm hover:shadow-md transition">
+          <h4 class="font-semibold text-gray-800">{{ estudiante.nombre }} {{ estudiante.apellido }}</h4>
+          <p class="text-xs text-gray-500 mt-1">Correo: {{ estudiante.correo }}</p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noEstudiantes>
+      <p class="text-center text-gray-500 mt-4">No hay estudiantes asignados a esta aula.</p>
+    </ng-template>
+  </div>
+
+  <!-- Botón cerrar -->
+  <div class="flex justify-end p-4">
+    <button 
+      type="button" 
+      (click)="cerrar()"
+      class="cursor-pointer px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>

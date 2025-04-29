@@ -29,18 +29,23 @@ export class EstudiantesComponent {
   }
 
   obtenerAulasDelEstudiante(idEstudiante: number): void {
-    //this.loader.show();
-    // this.aulaService.obtenerAulasPorEstudiante(idEstudiante).subscribe({
-    //   next: (res: any) => {
-    //     this.aulas = res.dataList || [];
-    //     this.loader.hide();
-    //   },
-    //   error: (err:any) => {
-    //     console.error('Error al obtener aulas del estudiante', err);
-    //     this.loader.hide();
-    //   }
-    // });
+    this.loader.show();
+    this.aulaService.GetAulasEstudiantes(idEstudiante).subscribe({
+      next: (res: any) => {
+        this.aulas = res.dataList?.map((a: any) => ({
+          idAula: a.idAula,
+          nombre: a.nombreAula, // ajuste clave
+          profesor: a.profesor
+        })) || [];
+        this.loader.hide();
+      },
+      error: (err: any) => {
+        console.error('Error al obtener aulas del estudiante', err);
+        this.loader.hide();
+      }
+    });
   }
+  
 
   aulasFiltradas(): any[] {
     return this.aulas.filter(aula =>

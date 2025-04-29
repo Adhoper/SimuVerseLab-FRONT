@@ -1,19 +1,32 @@
-<div class="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Asignar Profesor</h2>
-  
-    <div class="mb-4">
-      <label class="block text-gray-700 font-medium mb-2">Selecciona un profesor:</label>
-      <select [(ngModel)]="idProfesorSeleccionado" class="cursor-pointer w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option class="cursor-pointer" [ngValue]="null">-- Selecciona --</option>
-        <option class="cursor-pointer" *ngFor="let prof of profesores" [value]="prof.idUsuario">
-          {{ prof.nombre }} {{ prof.apellido }}
-        </option>
-      </select>
+<div class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+  <!-- Header azul -->
+  <div class="bg-indigo-600 p-4">
+    <h2 class="text-lg font-bold text-white text-center">Asignar Profesor</h2>
+  </div>
+
+  <div class="p-6">
+    <!-- Grid de profesores -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[400px] overflow-y-auto">
+      <label *ngFor="let prof of profesores" class="flex items-center gap-3 p-3 border rounded-lg hover:bg-indigo-50 cursor-pointer transition">
+        <input 
+          type="radio" 
+          name="profesor" 
+          [value]="prof.idUsuario" 
+          [(ngModel)]="idProfesorSeleccionado"
+          class="accent-blue-600"
+        />
+        <div class="flex flex-col">
+          <span class="font-semibold text-gray-800">{{ prof.nombre }} {{ prof.apellido }}</span>
+          <span class="text-xs text-gray-500">{{ prof.correo }}</span>
+          <span class="text-xs text-gray-500">{{ prof.telefono }}</span>
+        </div>
+      </label>
     </div>
-  
+
+    <!-- Botones -->
     <div class="flex justify-end gap-2 mt-6">
-      <button class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md" (click)="cancelar()">Cancelar</button>
-      <button class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" (click)="asignar()" [disabled]="!idProfesorSeleccionado">Asignar</button>
+      <button type="button" class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 text-gray-700" (click)="cancelar()">Cancelar</button>
+      <button type="button" class="cursor-pointer px-4 py-2 bg-blue-600 rounded-md hover:bg-blue-700 text-white" (click)="asignar()" [disabled]="!idProfesorSeleccionado">Asignar</button>
     </div>
   </div>
-  
+</div>

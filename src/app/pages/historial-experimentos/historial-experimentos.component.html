@@ -1,1 +1,111 @@
-<p>historial-experimentos works!</p>
+<div class="p-6">
+  <h2 class="flex items-center gap-3 text-3xl font-bold text-indigo-700 mb-8">
+    <i class="fas fa-history"></i> Historial de Experimentos
+  </h2>
+
+  <!-- Tabs -->
+  <div *ngIf="mostrarHistorialOtros" class="flex mb-8 space-x-4">
+    <button (click)="cambiarTab('propio')" 
+      [ngClass]="tabActivo === 'propio' ? 'bg-indigo-600 text-white' : 'bg-gray-300 text-gray-800'"
+      class="px-6 py-3 rounded-lg font-semibold cursor-pointer transition-all hover:bg-indigo-500">
+      Mi Historial
+    </button>
+
+    <button (click)="cambiarTab('otros')" 
+      [ngClass]="tabActivo === 'otros' ? 'bg-indigo-600 text-white' : 'bg-gray-300 text-gray-800'"
+      class="px-6 py-3 rounded-lg font-semibold cursor-pointer transition-all hover:bg-indigo-500">
+      {{ rol === 'Profesor' ? 'Historial de mis Estudiantes' : 'Historial de Usuarios' }}
+    </button>
+  </div>
+
+  <!-- Mi Historial -->
+  <div *ngIf="tabActivo === 'propio'">
+    <div *ngIf="historialPropio.length > 0; else noHistorialPropio" class="overflow-x-auto shadow-2xl rounded-xl bg-white">
+      
+      <!-- Filtro -->
+      <div class="p-4">
+        <input [(ngModel)]="filtroPropio" 
+               placeholder="Buscar Experimento o Fecha..." 
+               class="w-full p-2 border border-gray-300 rounded-lg mb-4 outline-none" />
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-indigo-100 text-indigo-700 text-sm">
+          <tr>
+            <th class="px-6 py-4 text-left font-bold">Experimento</th>
+            <th class="px-6 py-4 text-left font-bold">Puntaje</th>
+            <th class="px-6 py-4 text-left font-bold">Tiempo</th>
+            <th class="px-6 py-4 text-left font-bold">Fecha</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
+          <tr *ngFor="let item of historialPropioFiltrado | paginate : { itemsPerPage: 8, currentPage: paginaPropia }" class="hover:bg-indigo-50">
+            <td class="px-6 py-4">{{ item.nombreExperimento }}</td>
+            <td class="px-6 py-4 font-semibold text-green-600">{{ item.puntaje }}/10</td>
+            <td class="px-6 py-4">{{ item.tiempoTotalSegundos }} s</td>
+            <td class="px-6 py-4">{{ item.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="flex justify-center mt-4" *ngIf="historialPropioFiltrado.length > 5">
+        <pagination-controls (pageChange)="paginaPropia = $event" 
+          previousLabel="Anterior" nextLabel="Siguiente"
+          class="flex justify-center items-center my-4 gap-2 text-sm text-gray-600 font-medium"
+          [maxSize]="5" [responsive]="true" [autoHide]="true">
+        </pagination-controls>
+      </div>
+    </div>
+
+    <ng-template #noHistorialPropio>
+      <p class="text-gray-600 text-center mt-10">No tienes historial de experimentos aún.</p>
+    </ng-template>
+  </div>
+
+  <!-- Historial de Otros -->
+  <div *ngIf="tabActivo === 'otros'">
+    <div *ngIf="historialOtros.length > 0; else noHistorialOtros" class="overflow-x-auto shadow-2xl rounded-xl bg-white">
+      
+      <!-- Filtro -->
+      <div class="p-4">
+        <input [(ngModel)]="filtroOtros" 
+               placeholder="Buscar Usuario, Experimento o Fecha..." 
+               class="w-full p-2 border border-gray-300 rounded-lg mb-4 outline-none" />
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-indigo-100 text-indigo-700 text-sm">
+          <tr>
+            <th class="px-6 py-4 text-left font-bold">Usuario</th>
+            <th class="px-6 py-4 text-left font-bold">Experimento</th>
+            <th class="px-6 py-4 text-left font-bold">Puntaje</th>
+            <th class="px-6 py-4 text-left font-bold">Tiempo</th>
+            <th class="px-6 py-4 text-left font-bold">Fecha</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
+          <tr *ngFor="let item of historialOtrosFiltrado | paginate : { itemsPerPage: 8, currentPage: paginaOtros }" class="hover:bg-indigo-50">
+            <td class="px-6 py-4">{{ item.nombreUsuario }}</td>
+            <td class="px-6 py-4">{{ item.nombreExperimento }}</td>
+            <td class="px-6 py-4 font-semibold text-green-600">{{ item.puntaje }}/10</td>
+            <td class="px-6 py-4">{{ item.tiempoTotalSegundos }} s</td>
+            <td class="px-6 py-4">{{ item.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="flex justify-center mt-4" *ngIf="historialOtrosFiltrado.length > 5">
+        <pagination-controls (pageChange)="paginaOtros = $event" 
+          previousLabel="Anterior" nextLabel="Siguiente"
+          class="flex justify-center items-center my-4 gap-2 text-sm text-gray-600 font-medium"
+          [maxSize]="5" [responsive]="true" [autoHide]="true">
+        </pagination-controls>
+      </div>
+    </div>
+
+    <ng-template #noHistorialOtros>
+      <p class="text-gray-600 text-center mt-10">No hay historial registrado.</p>
+    </ng-template>
+  </div>
+
+</div>

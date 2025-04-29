@@ -6,7 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-//import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { NgxEchartsModule } from 'ngx-echarts';
+// import echarts core
+import * as echarts from 'echarts/core';
+// import necessary echarts components
+import { BarChart } from 'echarts/charts';
+import { GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
 
 
@@ -20,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxEchartsModule.forRoot({ echarts }),
     //NgxMaskDirective,
     //NgxMaskPipe
   ],

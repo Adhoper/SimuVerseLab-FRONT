@@ -1,30 +1,45 @@
-<div class="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+<div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+  
+  <!-- Encabezado azul -->
+  <div class="bg-indigo-600 p-4">
+    <h2 class="text-lg font-bold text-white text-center">
       {{ data ? 'Editar Aula' : 'Crear Aula' }}
     </h2>
-  
+  </div>
+
+  <!-- Formulario -->
+  <div class="p-6">
     <form [formGroup]="aulaForm" (ngSubmit)="guardar()">
+      
       <label class="block mb-4">
         <span class="text-gray-700 font-medium">Nombre del Aula</span>
         <input
           type="text"
-          formControlName="nombre"
+          formControlName="nombreAula"
           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
+    
       <label class="block mb-4">
-        <span class="text-gray-700 font-medium">Cantidad</span>
+        <span class="text-gray-700 font-medium">Capacidad de Estudiantes</span>
         <input
-          type="text"
-          formControlName="nombre"
+          type="number"
+          formControlName="capacidad"
           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
+    
       <div class="flex justify-end gap-2 mt-6">
-        <button type="button" class="cursor-pointer px-4 py-2 bg-gray-200 rounded-md" (click)="cancelar()">Cancelar</button>
+        <button 
+          type="button" 
+          class="cursor-pointer px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700" 
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
         <button
           type="submit"
-          class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          class="cursor-pointer px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white"
           [disabled]="aulaForm.invalid"
         >
           {{ data ? 'Guardar' : 'Crear' }}
@@ -32,4 +47,5 @@
       </div>
     </form>
   </div>
-  
+
+</div>
