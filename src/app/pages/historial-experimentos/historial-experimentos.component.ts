@@ -59,6 +59,7 @@ export class HistorialExperimentosComponent {
       this.historialService.GetHistorialInstitucion(this.usuario.idInstitucion).subscribe({
         next: (res: any) => {
           this.historialOtros = res.dataList || [];
+          console.log(this.historialOtros);
         },
         error: (err) => console.error('Error al obtener historial de la institución', err)
       });

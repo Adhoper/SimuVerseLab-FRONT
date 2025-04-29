@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   register_per_page: 10,
   //BASE_API_URL: 'https://localhost:7216/',
   BASE_API_URL: 'http://adriancuret-001-site1.mtempurl.com/',

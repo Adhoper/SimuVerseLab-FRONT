@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.errorMensaje = 'Error del servidor o conexión';
-          console.error(err);
+          this.errorMensaje = err.error.message;
+          console.log(err.error.message);
           this.loader.hide();
         }
       });
