@@ -60,12 +60,13 @@
 
     <!-- Botón Ver Todo -->
     <div *ngIf="HistorialExperimentosUser.length > 5">
-      <button 
-        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition"
-        (click)="verHistorialCompleto()"
-      >
-        Ver historial completo
-      </button>
+      <button
+      class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition"
+      [routerLink]="['/historialExperimento']"
+    >
+      Ver historial completo
+    </button>
+    
     </div>
   </div>
 
