@@ -32,6 +32,7 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-indigo-100 text-indigo-700 text-sm">
           <tr>
+            <th class="px-6 py-4 text-left font-bold">Laboratorio</th>
             <th class="px-6 py-4 text-left font-bold">Experimento</th>
             <th class="px-6 py-4 text-left font-bold">Puntaje</th>
             <th class="px-6 py-4 text-left font-bold">Tiempo</th>
@@ -40,6 +41,7 @@
         </thead>
         <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
           <tr *ngFor="let item of historialPropioFiltrado | paginate : { itemsPerPage: 8, currentPage: paginaPropia }" class="hover:bg-indigo-50">
+            <td class="px-6 py-4">{{ item.nombreLaboratorio }}</td>
             <td class="px-6 py-4">{{ item.nombreExperimento }}</td>
             <td class="px-6 py-4 font-semibold text-green-600">{{ item.puntaje }}/10</td>
             <td class="px-6 py-4">{{ item.tiempoTotalSegundos }} s</td>
@@ -77,6 +79,7 @@
         <thead class="bg-indigo-100 text-indigo-700 text-sm">
           <tr>
             <th class="px-6 py-4 text-left font-bold">Usuario</th>
+            <th class="px-6 py-4 text-left font-bold">Laboratorio</th>
             <th class="px-6 py-4 text-left font-bold">Experimento</th>
             <th class="px-6 py-4 text-left font-bold">Puntaje</th>
             <th class="px-6 py-4 text-left font-bold">Tiempo</th>
@@ -86,6 +89,7 @@
         <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
           <tr *ngFor="let item of historialOtrosFiltrado | paginate : { itemsPerPage: 8, currentPage: paginaOtros }" class="hover:bg-indigo-50">
             <td class="px-6 py-4">{{ item.nombreUsuario }}</td>
+            <td class="px-6 py-4">{{ item.nombreLaboratorio }}</td>
             <td class="px-6 py-4">{{ item.nombreExperimento }}</td>
             <td class="px-6 py-4 font-semibold text-green-600">{{ item.puntaje }}/10</td>
             <td class="px-6 py-4">{{ item.tiempoTotalSegundos }} s</td>
