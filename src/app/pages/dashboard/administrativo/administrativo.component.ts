@@ -196,9 +196,4 @@ export class AdministrativoComponent implements OnInit {
   }
   
 
-  verHistorialCompleto() {
-    window.location.href = '/historialExperimento';
-  }
-  
-
 }
