@@ -21,6 +21,7 @@ export class AdministrativoComponent implements OnInit {
   aulas: any[] = [];
   filtroNombre: string = '';
   filtroEstatus: string = '';
+  user: any;
 
   constructor(
     private aulasService: AulaService,
@@ -31,15 +32,17 @@ export class AdministrativoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUsuario();
+    //console.log(this.user);
     this.obtenerAulas();
   }
 
   obtenerAulas(): void {
     this.loader.show();
-    this.aulasService.ObtenerAulas().subscribe({
+    this.aulasService.ObtenerAulas(this.user.idInstitucion).subscribe({
       next: (res: any) => {
         this.aulas = res.dataList || [];
-        console.log(this.aulas);
+        //console.log(this.aulas);
         this.loader.hide();
       },
       error: (err: any) => {

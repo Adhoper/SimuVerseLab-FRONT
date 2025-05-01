@@ -5,6 +5,7 @@ import { AulaService } from '../../../../services/Aula.service';
 import { SharedModule } from '../../../../shared/shared.module';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../../services/usuario.service';
+import { AuthService } from '../../../../services/AuthService.service';
 
 @Component({
   selector: 'app-asignar-profesor',
@@ -16,22 +17,25 @@ export class AsignarProfesorComponent {
 
   profesores: any[] = [];
   idProfesorSeleccionado: number | null = null;
+  user: any;
 
   constructor(
     public dialogRef: MatDialogRef<AsignarProfesorComponent>,
     @Inject(MAT_DIALOG_DATA) public aula: any,
     private aulaService: AulaService,
     private usuarioService: UsuarioService,
+    private authService: AuthService,
     private loader: LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUsuario();
     this.obtenerProfesores();
   }
 
   obtenerProfesores() {
     this.loader.show();
-    this.usuarioService.GetAllProfesores().subscribe({
+    this.usuarioService.GetAllProfesores(this.user.idInstitucion).subscribe({
       next: (res: any) => {
         this.profesores = res.dataList || [];
         this.loader.hide();

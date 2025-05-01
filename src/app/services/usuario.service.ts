@@ -26,12 +26,12 @@ export class UsuarioService {
     return this.getQuerys(`${this.RUTA}get-usuarios-institucion/${idInstitucion}`);
   }
 
-  GetAllProfesores() {
-    return this.getQuerys(`${this.RUTA}get-all-profesor`);
+  GetAllProfesores(idInstitucion:number) {
+    return this.getQuerys(`${this.RUTA}get-all-profesor/${idInstitucion}`);
   }
 
   
-  GetAllEstudiantes() {
-    return this.getQuerys(`${this.RUTA}get-all-estudiantes`);
+  GetAllEstudiantes(idInstitucion:number) {
+    return this.getQuerys(`${this.RUTA}get-all-estudiantes/${idInstitucion}`);
   }
 }

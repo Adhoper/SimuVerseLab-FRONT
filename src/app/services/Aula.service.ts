@@ -23,8 +23,9 @@ export class AulaService {
   }
 
   // Obtener todas las aulas
-  ObtenerAulas() {
-    return this.getQuery(`${this.RUTA}get-all-aulas`);
+
+  ObtenerAulas(idInstitucion:number) {
+    return this.getQuery(`${this.RUTA}get-all-aulas/${idInstitucion}`);
   }
 
   // Crear un aula

@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AulaService } from '../../../../services/Aula.service';
 import { SharedModule } from '../../../../shared/shared.module';
 import { LoaderService } from '../../../../services/loader.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../services/AuthService.service';
 
 @Component({
   selector: 'app-gestionar-aula',
@@ -12,12 +13,14 @@ import Swal from 'sweetalert2';
   templateUrl: './gestionar-aula.component.html',
   styleUrl: './gestionar-aula.component.css'
 })
-export class GestionarAulaComponent {
+export class GestionarAulaComponent implements OnInit {
   aulaForm: FormGroup;
+  user: any;
 
   constructor(
     private fb: FormBuilder,
     private aulaService: AulaService,
+    private authService: AuthService,
     private loader: LoaderService,
     public dialogRef: MatDialogRef<GestionarAulaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -27,9 +30,12 @@ export class GestionarAulaComponent {
       capacidad: [data?.capacidad || '', [Validators.required, Validators.min(1)]]
     });
   }
+  ngOnInit(): void {
+    this.user = this.authService.getUsuario();
+  }
 
   guardar() {
-    console.log(this.aulaForm.valid);
+    
     if (this.aulaForm.valid) {
       const formData = this.aulaForm.value;
       this.loader.show();
@@ -63,7 +69,8 @@ export class GestionarAulaComponent {
         // 🟢 Crear
         const crearData = {
           nombreAula: formData.nombreAula,
-          capacidad: formData.capacidad
+          capacidad: formData.capacidad,
+          idInstitucion: this.user.idInstitucion
         };
 
         this.aulaService.CrearAula(crearData).subscribe({
