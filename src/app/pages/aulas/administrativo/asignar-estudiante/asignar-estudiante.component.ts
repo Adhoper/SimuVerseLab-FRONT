@@ -5,6 +5,7 @@ import { AulaService } from '../../../../services/Aula.service';
 import { SharedModule } from '../../../../shared/shared.module';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../../services/usuario.service';
+import { AuthService } from '../../../../services/AuthService.service';
 
 @Component({
   selector: 'app-asignar-estudiante',
@@ -15,22 +16,25 @@ import { UsuarioService } from '../../../../services/usuario.service';
 export class AsignarEstudianteComponent {
   estudiantes: any[] = [];
   seleccionados: number[] = [];
+  user: any;
 
   constructor(
     public dialogRef: MatDialogRef<AsignarEstudianteComponent>,
     @Inject(MAT_DIALOG_DATA) public aula: any,
     private aulaService: AulaService,
     private usuarioService: UsuarioService,
+    private authService: AuthService,
     private loader: LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUsuario();
     this.obtenerEstudiantesDisponibles();
   }
 
   obtenerEstudiantesDisponibles(): void {
     this.loader.show();
-    this.usuarioService.GetAllEstudiantes().subscribe({
+    this.usuarioService.GetAllEstudiantes(this.user.idInstitucion).subscribe({
       next: (res: any) => {
         this.estudiantes = res.dataList || [];
         this.loader.hide();

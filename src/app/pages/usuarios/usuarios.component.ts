@@ -3,17 +3,19 @@ import { SharedModule } from '../../shared/shared.module';
 import { UsuarioService } from '../../services/usuario.service';
 import { LoaderService } from '../../services/loader.service';
 import { AuthService } from '../../services/AuthService.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-usuarios',
-  imports: [SharedModule],
+  imports: [SharedModule,NgxPaginationModule],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
 
   usuarios: any[] = [];
-  filtroNombre: string = '';
+  paginaUsuarios: number = 1;
+filtroNombre: string = '';
   user: any;
 
   constructor(
@@ -42,13 +44,11 @@ export class UsuariosComponent {
   }
 
   get usuariosFiltrados() {
-    const filtro = this.filtroNombre.trim().toLowerCase();
-    if (!filtro) return this.usuarios;
-    
+    if (!this.filtroNombre.trim()) return this.usuarios;
     return this.usuarios.filter(u =>
-      (u.nombre?.toLowerCase().includes(filtro)) ||
-      (u.apellido?.toLowerCase().includes(filtro)) ||
-      (u.correo?.toLowerCase().includes(filtro))
+      u.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      u.apellido.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      u.correo.toLowerCase().includes(this.filtroNombre.toLowerCase())
     );
   }
 

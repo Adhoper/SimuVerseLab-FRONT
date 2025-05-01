@@ -25,7 +25,8 @@
           </tr>
         </thead>
         <tbody class="text-gray-700 text-sm divide-y divide-gray-100">
-          <tr *ngFor="let usuario of usuariosFiltrados" class="hover:bg-indigo-50">
+          <tr *ngFor="let usuario of usuariosFiltrados | paginate: { itemsPerPage: 8, currentPage: paginaUsuarios }" class="hover:bg-indigo-50">
+
             <td class="px-6 py-4">{{ usuario.nombre }} {{ usuario.apellido }}</td>
             <td class="px-6 py-4">{{ usuario.correo }}</td>
             <td class="px-6 py-4">{{ usuario.nombreRol }}</td>
@@ -33,6 +34,15 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="flex justify-center mt-4" *ngIf="usuariosFiltrados.length > 5">
+        <pagination-controls (pageChange)="paginaUsuarios = $event"
+          previousLabel="Anterior" nextLabel="Siguiente"
+          class="flex justify-center items-center my-4 gap-2 text-sm text-gray-600 font-medium"
+          [maxSize]="5" [responsive]="true" [autoHide]="true">
+        </pagination-controls>
+      </div>
+      
     </div>
   </div>
   
